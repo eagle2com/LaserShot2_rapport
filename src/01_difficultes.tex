@@ -1,0 +1,15 @@
+\section{Difficultées}
+
+\subsection{Carte réseau compatible temps-réel}
+Une carte ethernet compatible avec les drivers temps-réel d'une bonne qualité est nécessaire pour commander des drives. La carte sur l'ordinateur portable était inutilisable, ainsi que la carte présente de base sur l'ordinateur de développement. (Qui marche néanmoins avec TwinCat pour la récupération des fichiers de mapping eni.xml) C'est pourquoi une nouvelle carte PCIx1 prévu pour des serveurs a été ajouté. 
+
+\subsection{Drift du timer APIC}
+
+Les drives présentaient des erreurs périodiques, visibles sous forme de sauts. A première vue, ceci devait être du à un timer dans le code qui s'activait.
+
+\par
+En fait, ceci était du à un drift dans le timer APIC (Advanced Programmable Interrupt Controller).
+
+!!! GRAPHIQUE DU DRIFT ICI !!!
+
+Le grapique (ref) a été obtenu en exécutant ... .Un retard de l'horloge temps réel de 1000 ppm est visible. Le régulateur du Master Acontis  essaye de le compenser mais ce n'est pas suffisant. D'après le fabriquant, au dessu de 600 ppm il ne peut plus rien faire. Suite à cela, des piques de plusieurs pourcents sont présents environ toutes les secondes. Ils provoquents des sauts importants dans la commande des drives et sont clairement observable lors de l'affichage d'un cercle: il "pulse" à la mêne fréquence que ces piques.

@@ -1,0 +1,23 @@
+\input{def/parametre.tex}
+\begin{document}
+\input{def/pagetitre.tex}
+%--------------------------------------------
+
+%table des matieres
+\setcounter{page}{1} % on commence la numeration a 1 sur cette page
+\setcounter{secnumdepth}{5}% profondeur de la table des matieres.
+\setcounter{tocdepth}{4} 
+\tableofcontents
+\pagenumbering{roman}
+\newpage
+\setlength{\parindent}{0 cm}% supprime les tabulation ? chaque nouveau paragraphe
+\numberwithin{equation}{section} % num?ration des ?quation par chapitre
+\numberwithin{figure}{section} 
+\numberwithin{table}{section} 
+\pagenumbering{arabic}
+%--------------------------------------------
+%il faut mettre les fichiers à partir d'ici
+\input{src/00_Introduction.tex}
+\input{src/01_difficultes.tex}
+\input{src/02_configuration.tex}
+\end{document}

@@ -1,0 +1,240 @@
+% classe du document
+\documentclass[12pt,a4paper]{article}
+%---------------------------------------------------------------------%
+% contient tout le necessaire a un rapport standar en info.
+% certain paquet sont tres specifique, mais je les ai garder quand meme.
+
+
+%%%%%%%
+% use %
+%%%%%%%
+\usepackage[T1]{fontenc} % permet la cesure sur les mots accentu?
+\usepackage{amsmath}
+ % selection de la police du source: windows 
+\usepackage[utf8]{inputenc}
+%pour importer fichier matlab dans les annexes, mettre en commentaire lstset si utilis?
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{./def/mcode}
+% pour avor des degree jolis. (utilise \degres) enfin c'est surtout pour virer un warnings.
+\usepackage{textcomp}
+\usepackage{tabularx}
+
+\usepackage[french]{babel} % Internationalisation, option fran?ais
+\selectlanguage{francais} % Le document sera ?crit en fran?ais
+
+%---------------------------------------------------------------------%
+% NUMEROTATION DE PAGES
+\usepackage{lastpage}
+% exemple:
+% \pageref{LastPage}
+% note: peut poser des problemes avec des paquets comme:
+% endfloat, endnotes, fn2end
+% ceux qui rajoute des trucs a la fin.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%C'est pour mettre du code souce dans latex
+\usepackage{verbatim}
+%  le reste de cette section ? mettre en commentaire si utilisation du script mcode
+% pouR l'insertion du code matlab{
+\usepackage[numbered,autolinebreaks,useliterate]{./def/mcode}
+\usepackage{listings}
+%\usepackage[colorinlistoftodos]{todonotes}
+%}
+%\lstset{ % general style for listings 
+%   numbers=left 
+%   , tabsize=2 
+%   , frame=single 
+%   , breaklines=true 
+%   , basicstyle=\ttfamily 
+%   , numberstyle=\tiny\ttfamily 
+%   , framexleftmargin=13mm 
+%   , backgroundcolor=\color[rgb]{0.95,1.00, 0.95} 
+%   , xleftmargin=12mm 
+%   %, frameround={tttt} 
+%   , captionpos=b 
+%} 
+%---------------------------------------------------------------------%
+% MARGES / taille des elements de mise en page
+%---------------------------------------------------------------------%
+% CUSTOM TOTAL de mes EN-T?TE.
+% MARGES:
+
+\usepackage{geometry}
+\geometry{top=2.5cm, bottom=2.5cm,left=2.5cm, right=2.3cm}
+% DOC:
+%\addtolength{param?tre}{longueur}
+%\textheight
+%\textwidth
+%\marginparwidth % marge de gauche
+%\headheight % hauteur de l'entete
+%
+%en vrac: 
+%1 un pouce + \hoffset
+%2 un pouce + \voffset
+%3 \evensidemargin = 70pt 
+%4 \topmargin = 22pt
+\headheight = 20pt
+%6 \headsep = 19pt
+%7 \textheight = 595pt
+%8 \textwidth = 360pt
+%9 \marginparsep = 7pt
+%10 \marginparwidth = 106pt
+%11 \footskip = 27pt
+%\marginparpush = 5pt (non affich?)
+%\hoffset = 0pt 
+%\voffset = 0pt
+%\paperwidth = 597pt 
+%\paperheight = 845pt
+
+%---------------------------------------------------------------------%
+% GESTION D URL
+% sans lien hypertext
+\usepackage{url}
+\urlstyle{rm}%sf, rm, same
+
+%\url{http://hostname/~username}
+
+%---------------------------------------------------------------------%
+% INSERTION D'IMAGE
+\usepackage{graphicx}
+\usepackage{float}
+% Ajoute un chemin de recherche. 
+%\graphicspath{{Chapitre1/gfx/}{Chapitre2/gfx/}}
+\graphicspath{{img/}}
+\usepackage{subcaption}
+
+% exemple
+% \includegraphics{monimage.jpg}
+% \includegraphics{./images/monimage.jpg}
+% \includegraphics[width=1.5cm]{monimage.jpg}
+% \includegraphics[width=0.75\textwidth]{monimage.jpg}
+% \includegraphics[height=0.5\paperheight]{monimage.png}
+\usepackage{epstopdf}% convertir les images eps en pdf sans avoir besoin de les convertir avant. ATTENTION NE PAS SUPPRIMER LE FICHIER .eps du dossier
+%---------------------------------------------------------------------%
+%pour mettre des notes tmp.
+%\newcommand{\tmp}[1]{
+%{\textbf{#1} \marginpar{\Huge{X}}}
+%}
+
+%---------------------------------------------------------------------%
+% pour la bilbio.
+%\newcommand{\titreLivre}[1]{\textit{#1}}
+
+%---------------------------------------------------------------------%
+% Pas de cesure pour ces mots
+\hyphenation{PVSYST}
+%\usepackage{lscape}
+
+%\usepackage{epsfig}
+%\usepackage{rotating}
+%\usepackage{fancybox}
+%\usepackage{slidesec}
+\usepackage{color}
+\usepackage{colortbl}
+%\usepackage{slides}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\entetegauche}
+\chead{} %haut centre
+\rhead{\entetedroite}
+\lfoot{}%pied de page gauche
+\cfoot{}%pied de page centr?
+\rfoot{\thepage}%pied de page
+%--------------------------------------------
+%--------------------------------------------
+%--------------------------------------------
+%--------------------------------------------
+\input{def/nom.tex}
+%--------------------------------------------
+%--------------------------------------------
+%--------------------------------------------
+%--------------------------------------------
+
+\def \entetedroite {\rightmark}
+
+
+
+%\def \titreLong {Traivail d'?tude}
+
+%---------------------------------------------------------------------%
+%---------------------------------------------------------------------%
+% INFOS DU DOCUMENTS
+% D?finition du titre du document,
+
+%\title{{\Huge \titre \\}{\Large \sousTitre }} 
+%\author{\auteurs}
+%(utile seulement pour les commande genre \maketitle)
+% \today = la date de compilation... 
+%---------------------------------------------------------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Gestion de link hypertext: %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% DOIT ETRE LE DERNIER PACKET CHARGER, car redefinit des commandes.
+% doit etre charger apres "VAR" global.
+% ici on peut sp?cifier une foule de comportement du PDF
+% Comme la description du fichier
+\usepackage[
+pdfauthor={\auteurs},
+%pdftitle={ \nomtitre },
+pdfcreator={pdftex},
+%pdfsubject={\titre},
+bookmarksnumbered = false, %ajoute les num?ro des section dans les onglets
+%pdfstartpage={5}, %page de d?but lors de l'ouverture (utile pour test de MeP)
+%pdfkeywords={\ecole, \branche,\titre, \sousTitre}, 
+colorlinks=true, % a la place d'un cadre. genial
+linkcolor=blue, %blue % c'est pour les HYPERLIENS
+anchorcolor=black,
+citecolor=blue,
+filecolor=magenta,
+menucolor=red,  
+%pagecolor=red, 
+plainpages=false,
+urlcolor=blue
+]
+{hyperref}
+
+% valeur par d?faut:
+
+%linkcolor  color  red  Color for normal internal links. 
+%anchorcolor  color  black  Color for anchor text. 
+%citecolor  color  green  Color for bibliographical citations in text. 
+%filecolor  color  magenta  Color for URLs which open local files. 
+%menucolor  color  red  Color for Acrobat menu items. 
+%pagecolor  color  red  Color for links to other pages. 
+%urlcolor  color  cyan  Color for linked URLs. 
+%frenchlinks  boolean  false  use small caps instead of color for links 
+
+%citebordercolor  RGB color  0 1 0  The color of the box around citations 
+%filebordercolor  RGB color  0 .5 .5  The color of the box around links to files 
+%linkbordercolor  RGB color  1 0 0  The color of the box around normal links 
+%menubordercolor  RGB color  1 0 0  The color of the box around Acrobat menu links 
+%pagebordercolor  RGB color  1 1 0  The color of the box around links to pages 
+%urlbordercolor  RGB color  0 1 1  The color of the box around links to URLs 
+%runbordercolor  RGB color  0 .7 .7  color of border around ?run? links
+
+%---------------------------------------------------------------------%
+%   \autoref{label}
+
+%This is a replacement for the usual \ref command that places a contextual label in front of the reference. This gives your users a bigger target to click for hyperlinks (e.g. ?section 2? instead of merely the number ?2?).
+
+%The label is worked out from the context of the original \label command by hyperref by using the macros listed below (shown with their default values). The macros can be redefined in documents using \renewcommand; note that some of these macros are already defined in the standard document classes. 
+
+%For each macro below, hyperref checks \*autorefname before \*name. For instance, it looks for \figureautorefname before \figurename.
+
+\renewcommand{\figureautorefname}    {\textsc{Fig.}}
+\renewcommand{\tableautorefname}     {\textsc{Tab.}}
+\renewcommand{\partautorefname}      {Part}
+\renewcommand{\appendixautorefname}  {Appendice}
+\renewcommand{\equationautorefname}  {Equation}
+\renewcommand{\Itemautorefname}      {Elément}
+%\renewcommand{\Chapterautorefname}   {chapitre}
+\renewcommand{\sectionautorefname}   {section}
+\renewcommand{\subsectionautorefname}{section} %CHG?
+\renewcommand{\subsubsectionautorefname}{section}
+\renewcommand{\paragraphautorefname} {paragraphe}
+\renewcommand{\Hfootnoteautorefname} {note}
+\renewcommand{\AMSautorefname}       {Equation}
+\renewcommand{\theoremautorefname}   {théorème}
+%---------------------------------------------------------------------%
+% pour utiliser des table de karnaugh
+%\input kvmacros
