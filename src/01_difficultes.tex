@@ -5,6 +5,7 @@ Une carte ethernet compatible avec les drivers temps-réel d'une bonne qualité 
 
 \subsection{Drift du timer APIC}
 
+\subsubsection{Constats}
 Les drives présentaient des erreurs périodiques, visibles sous forme de sauts. A première vue, ceci devait être du à un timer dans le code qui s'activait.
 
 \par
@@ -13,3 +14,13 @@ En fait, ceci était du à un drift dans le timer APIC (Advanced Programmable In
 !!! GRAPHIQUE DU DRIFT ICI !!!
 
 Le grapique (ref) a été obtenu en exécutant ... .Un retard de l'horloge temps réel de 1000 ppm est visible. Le régulateur du Master Acontis  essaye de le compenser mais ce n'est pas suffisant. D'après le fabriquant, au dessu de 600 ppm il ne peut plus rien faire. Suite à cela, des piques de plusieurs pourcents sont présents environ toutes les secondes. Ils provoquents des sauts importants dans la commande des drives et sont clairement observable lors de l'affichage d'un cercle: il "pulse" à la même fréquence que ces piques.
+
+\subsubsection{Détails}
+
+Sur un système ACPI, l'horloge du noyau INTime utilise le timer APIC (géré par l'horloge FSB) pour générer ses ticks bas-niveau (500 microsecondes par défaut). Vu que les cartes mères présentent des niveaux de précision différents, INTime fourni un moyen pour ajuster finement l'horloge du noyau. Vu que ce projet utilise INTime 4.0x, il faut ajuster la valeur d'offet qui se trouve dans le registre à l'endroit:
+
+\begin{lstlisting}[label=reg-path, caption=Chemin vers l'entrée du registre]
+	HKEY_LOCAL_MACHINE\SOFTWARE\TenAsys\INtime\
+	Distributed System Manager\Configured Locations For Realtime Nodes\
+	Individuals\[NODENAME]\RTKernel
+\end{lstlisting}
